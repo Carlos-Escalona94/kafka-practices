@@ -1,0 +1,7 @@
+FROM bitnami/kafka:3.1
+
+ADD kafka-entrypoint.sh ./kafka-entrypoint.sh
+
+# RUN ["chmod", "+x", "./kafka-entrypoint.sh"]
+
+ENTRYPOINT ["./wait-for-it.sh", "zookeeper:2181" , "--", "sh", "./kafka-entrypoint.sh"]
